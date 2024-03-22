@@ -5,17 +5,19 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class MenuManager : MonoBehaviour{
     public static MenuManager Instance;
-    [SerializeField] private MenuController _menuController;
-
+    [SerializeField] private RoomListManager _roomListManager;
+    [SerializeField] private SettingManager _settingManager;
+ 
     public void Awake(){
         Instance = this;
     }
 
-    public void SetRoomListingActive(bool isShown){
-        _menuController.ShowRoomList(isShown);
+    public void SetUpRoomListActive(bool isTrue){
+        _roomListManager.ShowRoomList(isTrue);
+        _roomListManager.ShouldPopulateRooms(isTrue);
     }
 
     public void SetSettingActive(bool isShown){
-        _menuController.ShowSettings(isShown);
+        _settingManager.ShowSettings(isShown);
     }
 }

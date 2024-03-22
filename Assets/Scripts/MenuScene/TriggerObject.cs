@@ -24,7 +24,7 @@ public class TriggerObject : MonoBehaviour{
             case PortalType.Home:
                 break;
             case PortalType.RoomListing:
-                MenuManager.Instance.SetRoomListingActive(isShown);
+                MenuManager.Instance.SetUpRoomListActive(isShown);
                 break;
             case PortalType.Settings:
                 MenuManager.Instance.SetSettingActive(isShown);

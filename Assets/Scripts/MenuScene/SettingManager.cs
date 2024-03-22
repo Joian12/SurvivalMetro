@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class SettingManager : MonoBehaviour{
+    [SerializeField] private SettingUIController _settingUIController;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ShowSettings(bool isShown){
+        _settingUIController.gameObject.SetActive(isShown);
     }
 }
