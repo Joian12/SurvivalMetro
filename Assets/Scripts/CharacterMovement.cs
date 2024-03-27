@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
-using FishNet.Connection;
-using FishNet.Object;
 using UnityEngine.AI;
 
-public class CharacterMovement : NetworkBehaviour
+public class CharacterMovement : MonoBehaviour
 {    
     #region Charactervalue
 
@@ -21,21 +19,10 @@ public class CharacterMovement : NetworkBehaviour
         _inputManager = InputManager.instance;
     }
 
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-
-        _characterController.enabled = base.IsOwner;
-        this.enabled = base.IsOwner;
-    }
-
     private Vector3 _currentMovement;
     [SerializeField] private CharacterController _characterController;
 
     private void Update() {
-        if(IsOwner == false){
-            return;
-        }
 
         HandleMovement();
     }
@@ -59,12 +46,12 @@ public class CharacterMovement : NetworkBehaviour
         Debug.Log(_currentMovement);
     }
 
-    [ServerRpc]
+    // [ServerRpc]
     private void MovementServer(Vector3 move){
         MovementObserver(move);
     }
 
-    [ObserversRpc]
+    // [ObserversRpc]
     private void MovementObserver(Vector3 move){
         _characterController.Move(move);
     }

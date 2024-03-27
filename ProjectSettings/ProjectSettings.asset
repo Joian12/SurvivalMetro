@@ -602,6 +602,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: FISHNET;FISHNET_V3
     7: FISHNET;FISHNET_V3
+    28: FISHNET;FISHNET_V3
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

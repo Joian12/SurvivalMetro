@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class Room : MonoBehaviour
 {
-   [SerializeField] private Text _roomName;
+   public Text RoomName { get; set; }
 }
