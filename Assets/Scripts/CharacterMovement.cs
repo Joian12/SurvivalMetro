@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.AI;
+ using Mirror;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : NetworkBehaviour
 {    
     #region Charactervalue
 
@@ -27,7 +27,9 @@ public class CharacterMovement : MonoBehaviour
         HandleMovement();
     }
 
+    [Client]
     private void HandleMovement() {
+        if(!isOwned) return;
         
         float speed = _walkSpeed * (SprintValue > 0 ? _sprintMultiplier : 1f); 
         var timeDelta = Time.deltaTime;
@@ -46,12 +48,12 @@ public class CharacterMovement : MonoBehaviour
         Debug.Log(_currentMovement);
     }
 
-    // [ServerRpc]
+    [Command]
     private void MovementServer(Vector3 move){
         MovementObserver(move);
     }
 
-    // [ObserversRpc]
+    [ClientRpc]
     private void MovementObserver(Vector3 move){
         _characterController.Move(move);
     }
