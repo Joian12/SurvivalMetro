@@ -2250,7 +2250,6 @@ GameObject:
   - component: {fileID: 1456613372}
   - component: {fileID: 1456613371}
   - component: {fileID: 1456613370}
-  - component: {fileID: 1456613369}
   - component: {fileID: 1456613368}
   - component: {fileID: 1456613367}
   m_Layer: 0
@@ -2332,31 +2331,10 @@ MonoBehaviour:
   clientIndex: 0
   _roomPlayerContainer: {fileID: 1301939607}
   _playerListingUI: {fileID: 957375502}
-  _maxCountPlayer: 2
+  _maxCountPlayer: 1
   _currentCountPlayer: 0
   maxPlayerCountText: {fileID: 1187732596}
   currentPlayerCountText: {fileID: 140761027}
---- !u!65 &1456613369
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456613366}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1456613370
 MonoBehaviour:
   m_ObjectHideFlags: 0
