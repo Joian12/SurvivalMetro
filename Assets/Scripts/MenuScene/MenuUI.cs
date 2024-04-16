@@ -33,15 +33,30 @@ public class MenuUI : MonoBehaviour
 
     private void Cancel() {
         Reset();
-        _networkManager.StartHost();
+        _networkManager.StopClient();
         _connecGO.SetActive(true);
     }
 
     private void Play() {
         _connecGO.SetActive(false);
-        _networkManager.StartHost();
         _networkManager.networkAddress = _ipInputField.text;
+
+        StartCoroutine(Delay());
+        
+        if (Transport.active is PortTransport portTransport) {
+            // use TryParse in case someone tries to enter non-numeric characters
+            if (ushort.TryParse("7777", out ushort port))
+                portTransport.Port = port;
+            
+        }
+        
         _readyGO.SetActive(!NetworkClient.active);
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3);
+        _networkManager.StartClient();
     }
 
     private void Reset() {
