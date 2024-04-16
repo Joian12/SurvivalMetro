@@ -49,7 +49,7 @@ namespace Mirror
 
         void StartButtons()
         {
-            if (!NetworkClient.active)
+            if (!NetworkClient.active) //// WHEN ALREADY CONNECTED
             {
 #if UNITY_WEBGL
                 // cant be a server in webgl build
@@ -70,13 +70,13 @@ namespace Mirror
                 if (GUILayout.Button("Client"))
                     manager.StartClient();
 
-                manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                manager.networkAddress = GUILayout.TextField(manager.networkAddress); // THIS IS IP ADDRESS HOST
                 // only show a port field if we have a port transport
                 // we can't have "IP:PORT" in the address field since this only
                 // works for IPV4:PORT.
                 // for IPV6:PORT it would be misleading since IPV6 contains ":":
                 // 2001:0db8:0000:0000:0000:ff00:0042:8329
-                if (Transport.active is PortTransport portTransport)
+                if (Transport.active is PortTransport portTransport)  /// PORT WILL ALWAYS BE 7777
                 {
                     // use TryParse in case someone tries to enter non-numeric characters
                     if (ushort.TryParse(GUILayout.TextField(portTransport.Port.ToString()), out ushort port))
@@ -94,7 +94,7 @@ namespace Mirror
                     manager.StartServer();
 #endif
             }
-            else
+            else ///WHEN LOOKING FOR A SERVER/HOST.
             {
                 // Connecting
                 GUILayout.Label($"Connecting to {manager.networkAddress}..");
