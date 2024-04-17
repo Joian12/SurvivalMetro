@@ -2331,7 +2331,7 @@ MonoBehaviour:
   clientIndex: 0
   _roomPlayerContainer: {fileID: 1301939607}
   _playerListingUI: {fileID: 957375502}
-  _maxCountPlayer: 1
+  _maxCountPlayer: 2
   _currentCountPlayer: 0
   maxPlayerCountText: {fileID: 1187732596}
   currentPlayerCountText: {fileID: 140761027}
