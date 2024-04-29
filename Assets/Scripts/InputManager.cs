@@ -47,13 +47,11 @@ public class InputManager : MonoBehaviour {
         _moveAction.performed += context =>
         {
             MoveInput = context.ReadValue<Vector2>();
-            Debug.Log("PERFORMED");
         };
         
         _moveAction.canceled += context =>
         {
             MoveInput = Vector2.zero;
-            Debug.Log("CANCELLED");
         };
         
         _lookAction.performed += context => LookInput = context.ReadValue<Vector2>();

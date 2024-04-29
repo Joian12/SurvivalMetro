@@ -5,59 +5,71 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// seperate all player list  to playerlistnetwork class; and use command
+/// </summary>
 public class MenuUI : MonoBehaviour
 {
+    public static MenuUI Current;
+    [SerializeField] private Text testNumber;
     [SerializeField] private GameObject _connecGO;
     [SerializeField] private GameObject _readyGO;
     
     [SerializeField] private TMP_InputField _ipInputField;
     [SerializeField] private Button _playButton;
-    
-    [SerializeField] private NetworkHandler _networkManager; //seperate this to networkhandler
+    [SerializeField] private MenuNetworkHelper _menuNetworkHelper;
+    // [SerializeField] private PlayerListNetwork _playerListNetwork;
+
 
     private void Awake() {
-        _networkManager = FindObjectOfType<NetworkHandler>();
+        Current = this;
     }
 
     private void OnEnable() {
-        Debug.Log("AWAKE");
         _playButton.onClick.AddListener(Play);
+        GlobalNetworkAction.OnServerAddPlayer += OnServerAddPlayer;
+        GlobalNetworkAction.OnClientRoomExit += OnClientRoomExit;
+        GlobalNetworkAction.OnClientRoomEnter += OnClientRoomEnter;
         Reset();
     }
 
     private void OnDisable() {
         _playButton.onClick.RemoveListener(Play);
+        GlobalNetworkAction.OnServerAddPlayer -= OnServerAddPlayer;
+        GlobalNetworkAction.OnClientRoomExit -= OnClientRoomExit;
+        GlobalNetworkAction.OnClientRoomEnter -= OnClientRoomEnter;
+
         Reset();
+    }
+    
+    private void OnServerAddPlayer() {
+        // testNumber.text = _menuNetworkHelper.GetClientCount().ToString();
+    }
+
+    private void OnClientRoomEnter() {
+        // PopulateAvatarList();
+    }
+
+    private void OnClientRoomExit() {
+        Debug.Log("EXIT -1");
     }
 
     private void Cancel() {
         Reset();
-        _networkManager.StopClient();
+        _menuNetworkHelper.StopClient();
         _connecGO.SetActive(true);
     }
 
     private void Play() {
         _connecGO.SetActive(false);
-        _networkManager.networkAddress = _ipInputField.text;
+        _menuNetworkHelper.SetNetwordAddress(_ipInputField.text); 
+        
+        _menuNetworkHelper.StartClient();
 
-        StartCoroutine(Delay());
-        
-        if (Transport.active is PortTransport portTransport) {
-            // use TryParse in case someone tries to enter non-numeric characters
-            if (ushort.TryParse("7777", out ushort port))
-                portTransport.Port = port;
-            
-        }
-        
         _readyGO.SetActive(!NetworkClient.active);
     }
 
-    IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(3);
-        _networkManager.StartClient();
-    }
+   
 
     private void Reset() {
         _connecGO.SetActive(true);
