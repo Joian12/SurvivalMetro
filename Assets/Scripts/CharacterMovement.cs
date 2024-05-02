@@ -44,8 +44,6 @@ public class CharacterMovement : NetworkBehaviour
         _currentMovement.z = worldDirection.z * speed * timeDelta; 
             
         MovementServer(_currentMovement);
-
-        Debug.Log(_currentMovement);
     }
 
     [Command]
