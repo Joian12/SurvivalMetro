@@ -14,6 +14,7 @@ public class CharacterMovement : NetworkBehaviour
     #endregion
     
     public float SprintValue { get; private set; }
+    [SerializeField] private float rotationSpeed;
 
     private void Awake() {
         _inputManager = InputManager.instance;
@@ -30,21 +31,25 @@ public class CharacterMovement : NetworkBehaviour
     [Client]
     private void HandleMovement() {
         if(!isOwned) return;
-        
+
         float speed = _walkSpeed * (SprintValue > 0 ? _sprintMultiplier : 1f); 
         var timeDelta = Time.deltaTime;
-        
-        
-        Vector3 inputDirection = new Vector3(_inputManager.MoveInput.x, 0f, _inputManager.MoveInput.y); 
-        Vector3 worldDirection = transform.TransformDirection(inputDirection);
 
-        worldDirection.Normalize();
-        
-        _currentMovement.x = worldDirection.x * speed * timeDelta;
-        _currentMovement.z = worldDirection.z * speed * timeDelta; 
-            
+        Vector3 inputDirection = new Vector3(_inputManager.MoveInput.x, 0f, _inputManager.MoveInput.y); 
+
+        inputDirection.Normalize();
+
+        _currentMovement = inputDirection * (speed * timeDelta);
+
         MovementServer(_currentMovement);
+
+        // Rotate the character if there's movement
+        if (_currentMovement.magnitude > 0) {
+            Quaternion targetRotation = Quaternion.LookRotation(_currentMovement, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
+    
 
     [Command]
     private void MovementServer(Vector3 move){

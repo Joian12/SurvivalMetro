@@ -93,7 +93,7 @@ public class NetworkHandler : NetworkRoomManager
    
    IEnumerator CheckReadyToBeginDelay()
    {
-      yield return new WaitForSeconds(3);
+      yield return new WaitForSeconds(2);
       CheckReadyToBegin();
       _playerListNetwork.gameObject.SetActive(false);
    }

@@ -43,7 +43,7 @@ public class PlayerSkill : MonoBehaviour
       Debug.Log("PERFORMED SKILL 1");
 
       Vector3 startTransform = transform.position;
-      Vector3 endTransform = transform.position + Vector3.forward * 5f; 
+      Vector3 endTransform = transform.position + transform.forward * 5f; 
 
       StartCoroutine(_dashComponentSkill.PerformDash(transform, startTransform, endTransform));
    }
