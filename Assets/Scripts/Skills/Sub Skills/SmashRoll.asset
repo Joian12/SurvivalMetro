@@ -15,7 +15,7 @@ MonoBehaviour:
   _skillName: SmashRoll
   _skillCategory: 1
   _skillAbilities: 0
-  _duration: 1
+  _duration: 0.4
   _damage: 0
   _canTeleport: 0
   _canDamage: 1

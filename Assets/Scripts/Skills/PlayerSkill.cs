@@ -45,7 +45,7 @@ public class PlayerSkill : MonoBehaviour
       Vector3 startTransform = transform.position;
       Vector3 endTransform = transform.position + transform.forward * 5f; 
 
-      StartCoroutine(_dashComponentSkill.PerformDash(transform, startTransform, endTransform));
+      StartCoroutine(_dashComponentSkill.PerformDash(transform, startTransform, endTransform)); 
    }
 
    
