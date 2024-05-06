@@ -149,6 +149,8 @@ MonoBehaviour:
   _playerUIController: {fileID: 0}
   _dashComponentSkill: {fileID: 11400000, guid: 77dbb21121fe24e1faf974cf3f79bd06,
     type: 2}
+  _shieldComponent: {fileID: 11400000, guid: 24b31251937ec422b92727e929d83a70, type: 2}
+  _ProjectileCompoent: {fileID: 0}
 --- !u!1 &3658476372096621597
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
    [SerializeField] private PlayerUIController _playerUIController;
-   [SerializeField] private DashComponentSkill _dashComponentSkill;
+   [SerializeField] private Skill _dashComponentSkill; // create list of skill
+   [SerializeField] private Skill _shieldComponent;
+   [SerializeField] private Skill _ProjectileCompoent;
 
    private void Start()
    {
@@ -45,13 +47,18 @@ public class PlayerSkill : MonoBehaviour
       Vector3 startTransform = transform.position;
       Vector3 endTransform = transform.position + transform.forward * 5f; 
 
-      StartCoroutine(_dashComponentSkill.PerformDash(transform, startTransform, endTransform)); 
+      StartCoroutine(_dashComponentSkill.PerformSkill(transform, startTransform, endTransform)); 
    }
 
    
    private void PerformSkill_2()
    {
       Debug.Log("PERFORMED SKILL 2");
+      
+      Vector3 startTransform = transform.position;
+      Vector3 endTransform = transform.position + transform.forward * 5f; 
+
+      StartCoroutine(_shieldComponent.PerformSkill(transform, startTransform, endTransform)); 
    }
    
    private void PerformSkill_3()
