@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private Transform _target;
+    public float _duration;
+    
+    private void OnEnable() {
+        StartCoroutine(SeekTarget());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
+        // return to pool
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+    }
+
+    private IEnumerator SeekTarget()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
         
+        while (elapsedTime < _duration)
+        {
+            elapsedTime = Time.time - startTime;
+            
+            yield return null;
+        }
+        
+        gameObject.SetActive(false);
     }
 }

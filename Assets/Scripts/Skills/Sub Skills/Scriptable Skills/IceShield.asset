@@ -18,5 +18,5 @@ MonoBehaviour:
   barrierPrefab: {fileID: 8530985513589631897, guid: 0122673c3a40b4ba4a87ab925901255e,
     type: 3}
   ifChildOfPlayer: 1
-  playerCanMove: 0
+  playerCanMove: 1
   duration: 5
