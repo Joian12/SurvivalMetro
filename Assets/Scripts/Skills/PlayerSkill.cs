@@ -8,7 +8,7 @@ public class PlayerSkill : MonoBehaviour
    [SerializeField] private PlayerUIController _playerUIController;
    [SerializeField] private Skill _dashComponentSkill; // create list of skill
    [SerializeField] private Skill _shieldComponent;
-   [SerializeField] private Skill _ProjectileCompoent;
+   [SerializeField] private Skill _projectileCompoent;
 
    private void Start()
    {
@@ -64,5 +64,10 @@ public class PlayerSkill : MonoBehaviour
    private void PerformSkill_3()
    {
       Debug.Log("PERFORMED SKILL 3");
+      
+      Vector3 startTransform = transform.position;
+      Vector3 endTransform = transform.position + transform.forward * 5f; 
+
+      StartCoroutine(_projectileCompoent.PerformSkill(transform, startTransform, endTransform)); 
    }
 }
