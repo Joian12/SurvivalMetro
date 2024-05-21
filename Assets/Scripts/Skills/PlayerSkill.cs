@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
+   [SerializeField] private PlayerInfo _playerInfo;
+
    [SerializeField] private PlayerUIController _playerUIController;
    [SerializeField] private Skill _dashComponentSkill; // create list of skill
    [SerializeField] private Skill _shieldComponent;

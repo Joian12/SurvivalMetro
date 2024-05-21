@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum SkillCategory
 {
@@ -18,6 +19,7 @@ public enum SkillAbilities
 public class Skill : ScriptableObject
 {
     public string _skillName;
+    public Image _skillImage;
     public SkillCategory _skillCategory;
     public SkillAbilities _skillAbilities;
 

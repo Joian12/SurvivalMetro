@@ -17,9 +17,12 @@ public class MenuUI : MonoBehaviour
     
     [SerializeField] private TMP_InputField _ipInputField;
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _skillToggleButton;
     [SerializeField] private MenuNetworkHelper _menuNetworkHelper;
-    // [SerializeField] private PlayerListNetwork _playerListNetwork;
 
+    [SerializeField] private GameObject _playerSettingSkillGameObject;
+    // [SerializeField] private PlayerListNetwork _playerListNetwork;
+    private bool _isOpen = false;
 
     private void Awake() {
         Current = this;
@@ -27,6 +30,7 @@ public class MenuUI : MonoBehaviour
 
     private void OnEnable() {
         _playButton.onClick.AddListener(Play);
+        _skillToggleButton.onClick.AddListener(ToggleSkillButton);
         GlobalNetworkAction.OnServerAddPlayer += OnServerAddPlayer;
         GlobalNetworkAction.OnClientRoomExit += OnClientRoomExit;
         GlobalNetworkAction.OnClientRoomEnter += OnClientRoomEnter;
@@ -35,10 +39,10 @@ public class MenuUI : MonoBehaviour
 
     private void OnDisable() {
         _playButton.onClick.RemoveListener(Play);
+        _skillToggleButton.onClick.RemoveListener(ToggleSkillButton);
         GlobalNetworkAction.OnServerAddPlayer -= OnServerAddPlayer;
         GlobalNetworkAction.OnClientRoomExit -= OnClientRoomExit;
         GlobalNetworkAction.OnClientRoomEnter -= OnClientRoomEnter;
-
         Reset();
     }
     
@@ -69,7 +73,10 @@ public class MenuUI : MonoBehaviour
         _readyGO.SetActive(!NetworkClient.active);
     }
 
-   
+    private void ToggleSkillButton() {
+        _isOpen = !_isOpen;
+        _playerSettingSkillGameObject.SetActive(_isOpen);
+    }
 
     private void Reset() {
         _connecGO.SetActive(true);
